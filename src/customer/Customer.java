@@ -1,6 +1,6 @@
 package customer;
 
-public class Customer{
+public class Customer {
 
     private String fullName;
 
