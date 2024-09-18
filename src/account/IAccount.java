@@ -1,11 +1,10 @@
 package account;
 
-import customer.ICustomer;
+import customer.Customer;
 
 public interface IAccount {
-    public double getBalance();
-    public boolean withdraw();
-    ICustomer showCustomer();
 
-
+    double getBalance();
+    void setBalance(double balance);
+    Customer getCustomer();
 }
