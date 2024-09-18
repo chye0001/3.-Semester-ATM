@@ -1,5 +1,7 @@
 package card;
 
+import account.IAccount;
+
 public class Card implements ICard {
     private String cardNumber;
     private String pin;

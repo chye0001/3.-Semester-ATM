@@ -1,5 +1,5 @@
 package security;
 
 public interface ISecuritySystem {
-    boolean authenticate(String correctPin, String pin);
+    boolean authenticate(String correctPin, String pinInput);
 }

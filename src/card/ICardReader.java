@@ -2,5 +2,5 @@ package card;
 
 public interface ICardReader {
 
-    Icard validateCard(String cardNumber);
+    ICard validateCard(String cardNumber);
 }
