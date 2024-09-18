@@ -29,13 +29,8 @@ public class Account implements IAccount {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
 }
+
+
+
+
