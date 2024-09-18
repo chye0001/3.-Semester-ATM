@@ -2,7 +2,9 @@ package customer;
 
 public class Customer {
 
-    private String fullName;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 
 
     public Customer(String firstName, String middleName, String lastName) {
@@ -10,6 +12,11 @@ public class Customer {
         this.middleName = middleName;
         this.lastName = lastName;
     }
+
+    public String getfullName(){
+        return getFirstName() + (!getMiddleName().isEmpty() ? getMiddleName() : "") + " " + getLastName();
+    }
+
 
     public String getFirstName() {
         return firstName;
