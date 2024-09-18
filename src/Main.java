@@ -1,9 +1,11 @@
 import account.Account;
 import account.IAccount;
 import card.Card;
+import card.CardReader;
 import card.ICard;
 import card.ICardReader;
 import customer.Customer;
+import customer.ICustomer;
 import dispenser.CashDispenser;
 import dispenser.ICashDispenser;
 import security.ISecuritySystem;
@@ -40,17 +42,18 @@ public class Main {
                 break;
             }
 
-            while (!cardReader.validateCard(cardNumber)) {
+            while (cardReader.validateCard(cardNumber) == null) {
                 System.out.println("invalid card number!");
                 cardNumber = scanner.nextLine();
-            };
+            }
+            ;
             ICard card = cardReader.validateCard(cardNumber);
 
             System.out.println("Please input pin code:");
             String pinCode = scanner.nextLine();
 
             if (securitySystem.authenticate(card.getPin(), pinCode)) {
-                Customer customer = card.getAccount().getCustomer();
+                ICustomer customer = card.getAccount().getCustomer();
                 System.out.println("Hi " + customer.getFullName());
                 System.out.println("Please input amount to withdraw:");
                 double amount = scanner.nextDouble();
@@ -58,9 +61,11 @@ public class Main {
                 boolean success = transactionProcessor.doTransaction(amount, card.getAccount());
                 if (!success) {
                     System.out.println("Insufficient funds :-(");
-                } else
+                    scanner.nextLine();
+                } else {
                     cashDispenser.dispenseCash(amount);
-                
+                    scanner.nextLine();
+                }
             } else {
                 System.out.println("Invalid pin code :-(");
             }
