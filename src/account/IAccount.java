@@ -1,10 +1,10 @@
 package account;
 
-import customer.Customer;
+import customer.ICustomer;
 
 public interface IAccount {
+    public double getBalance();
+    public boolean withhdraw(double amount);
 
-    double getBalance();
-    void setBalance(double balance);
-    Customer getCustomer();
+
 }
