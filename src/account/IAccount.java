@@ -4,8 +4,7 @@ import customer.ICustomer;
 
 public interface IAccount {
     public double getBalance();
-    public boolean withdraw();
-    ICustomer showCustomer();
+    public boolean withhdraw(double amount);
 
 
 }
