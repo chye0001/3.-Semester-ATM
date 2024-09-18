@@ -1,5 +1,5 @@
-import TransactionProcessor.ITransactionProcessor;
-import TransactionProcessor.TransactionProcessor;
+import transaction.ITransactionProcessor;
+import transaction.TransactionProcessor;
 
 import java.util.Scanner;
 
@@ -18,16 +18,20 @@ public class Main {
                 """);
         while(!cardNumber.equalsIgnoreCase("q")) {
 
-        //if 
         System.out.println("Please input card number: (q = quit)");
         cardNumber = scanner.nextLine();
+
+        // if cardnumber valid
         System.out.println("Please input pin code:");
         int pinCode = scanner.nextInt();
 
         // if cardnumber and pin is valid, do:
             System.out.println("Please input amount to withdraw:");
             double amount = scanner.nextDouble();
-            System.out.println(transactionProcessor.doTransaction(amount, cardNumber)); // hent account fra cardNumber somehow?
+
+            if (transactionProcessor.doTransaction(amount, cardNumber)) { // hent account fra cardNumber somehow?
+                // cashdispenser.dispense(amount);
+            };
 
         }
     }
