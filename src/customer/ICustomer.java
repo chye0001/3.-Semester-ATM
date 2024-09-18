@@ -8,9 +8,9 @@ public interface ICustomer {
 
     public void setFirstName(String firstName);
 
-    public String getMiddelName();
+    public String getMiddleName();
 
-    public void setMiddelName(String middelName);
+    public void setMiddleName(String middleName);
 
     public String getLastName();
 

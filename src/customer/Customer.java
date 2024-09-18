@@ -1,6 +1,6 @@
 package customer;
 
-public class Customer {
+public class Customer implements ICustomer{
 
     private String firstName;
     private String middleName;
@@ -13,7 +13,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getfullName(){
+    public String getFullName(){
         return getFirstName() + (!getMiddleName().isEmpty() ? getMiddleName() : "") + " " + getLastName();
     }
 
