@@ -58,11 +58,9 @@ public class Main {
                 boolean success = transactionProcessor.doTransaction(amount, card.getAccount());
                 if (!success) {
                     System.out.println("Insufficient funds :-(");
-
                 } else
                     cashDispenser.dispenseCash(amount);
                 
-
             } else {
                 System.out.println("Invalid pin code :-(");
             }
