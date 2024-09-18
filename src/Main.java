@@ -16,23 +16,25 @@ public class Main {
                 **** ATM TERMINAL ****
                 **********************
                 """);
-        while(!cardNumber.equalsIgnoreCase("q")) {
+        while (!cardNumber.equalsIgnoreCase("q")) {
 
-        System.out.println("Please input card number: (q = quit)");
-        cardNumber = scanner.nextLine();
+            System.out.println("Please input card number: (q = quit)");
+            cardNumber = scanner.nextLine();
 
-        // if cardnumber valid
-        System.out.println("Please input pin code:");
-        int pinCode = scanner.nextInt();
+            // if cardnumber valid
+            System.out.println("Please input pin code:");
+            int pinCode = scanner.nextInt();
 
-        // if cardnumber and pin is valid, do:
+            // if cardnumber and pin is valid, do:
             System.out.println("Please input amount to withdraw:");
             double amount = scanner.nextDouble();
 
-            if (transactionProcessor.doTransaction(amount, cardNumber)) { // hent account fra cardNumber somehow?
-                // cashdispenser.dispense(amount);
+            boolean success = transactionProcessor.doTransaction(amount, cardNumber);
+            if (success) { // hent account fra cardNumber somehow?
+                // System.out.println(cashdispenser.dispense(amount));
+            } else {
+                System.out.println("Insufficient funds :-(");
             };
-
         }
     }
 }
