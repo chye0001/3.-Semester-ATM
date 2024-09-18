@@ -3,6 +3,8 @@ import account.IAccount;
 import card.Card;
 import card.ICard;
 import card.ICardReader;
+import customer.Customer;
+import dispenser.CashDispenser;
 import dispenser.ICashDispenser;
 import security.ISecuritySystem;
 import security.SecuritySystem;
@@ -22,7 +24,6 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String cardNumber = "";
-        String pin = "";
         System.out.println("""
                 **********************
                 **** ATM TERMINAL ****
@@ -33,30 +34,34 @@ public class Main {
             System.out.println("Please input card number: (q = quit)");
 
             cardNumber = scanner.nextLine();
+            if (cardNumber.equalsIgnoreCase("q")) {
+                break;
+            }
+
             while (!cardReader.validateCard(cardNumber)) {
-                System.out.println("invalid cardnumber!");
+                System.out.println("invalid card number!");
                 cardNumber = scanner.nextLine();
             };
-            Card card = cardReader.validateCard(cardNumber);
+            ICard card = cardReader.validateCard(cardNumber);
 
             System.out.println("Please input pin code:");
-            int pinCode = scanner.nextInt();
+            String pinCode = scanner.nextLine();
 
-            if (securitySystem.authenticate(card.getPin.equals(pinCode)) {
-                System.out.println("Please input amount to withdraw:");
-                double amount = scanner.nextDouble();
-
-                boolean success = transactionProcessor.doTransaction(amount, cardNumber);
-                if (success) {
-                    System.out.println("Withdrawing " + amount);
-
-                } else {
-                    System.out.println("Insufficient funds :-(");
-                }
-
-            } else {
+            if (!securitySystem.authenticate(card.getPin(), pinCode)) {
                 System.out.println("Wrong pin");
             }
+
+            Customer customer = card.getAccount().getCustomer();
+            System.out.println("Hi " + customer.getFullName());
+            System.out.println("Please input amount to withdraw:");
+            double amount = scanner.nextDouble();
+
+            boolean success = transactionProcessor.doTransaction(amount, card.getAccount());
+            if (!success) {
+                System.out.println("Insufficient funds :-(");
+
+            } else
+                cashDispenser.dispenseCash(amount);
 
 
         }
