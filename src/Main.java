@@ -23,12 +23,14 @@ public class Main {
         ICardReader cardReader = new CardReader();
 
         Scanner scanner = new Scanner(System.in);
-        String cardNumber = "";
+
         System.out.println("""
                 **********************
                 **** ATM TERMINAL ****
                 **********************
                 """);
+
+        String cardNumber = "";
         while (!cardNumber.equalsIgnoreCase("q")) {
 
             System.out.println("Please input card number: (q = quit)");
@@ -47,23 +49,23 @@ public class Main {
             System.out.println("Please input pin code:");
             String pinCode = scanner.nextLine();
 
-            if (!securitySystem.authenticate(card.getPin(), pinCode)) {
-                System.out.println("Wrong pin");
+            if (securitySystem.authenticate(card.getPin(), pinCode)) {
+                Customer customer = card.getAccount().getCustomer();
+                System.out.println("Hi " + customer.getFullName());
+                System.out.println("Please input amount to withdraw:");
+                double amount = scanner.nextDouble();
+
+                boolean success = transactionProcessor.doTransaction(amount, card.getAccount());
+                if (!success) {
+                    System.out.println("Insufficient funds :-(");
+
+                } else
+                    cashDispenser.dispenseCash(amount);
+                
+
+            } else {
+                System.out.println("Invalid pin code :-(");
             }
-
-            Customer customer = card.getAccount().getCustomer();
-            System.out.println("Hi " + customer.getFullName());
-            System.out.println("Please input amount to withdraw:");
-            double amount = scanner.nextDouble();
-
-            boolean success = transactionProcessor.doTransaction(amount, card.getAccount());
-            if (!success) {
-                System.out.println("Insufficient funds :-(");
-
-            } else
-                cashDispenser.dispenseCash(amount);
-
-
         }
     }
 }
