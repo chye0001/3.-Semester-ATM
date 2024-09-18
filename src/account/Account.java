@@ -2,7 +2,7 @@ package account;
 
 import card.Card;
 
-public class Account {
+public class Account implements IAccount {
     Customer customer;
     double balance;
     Card card;
@@ -11,6 +11,18 @@ public class Account {
         this.customer = customer;
         this.balance = balance;
         this.card = card;
+    }
+
+    @Override
+    public boolean withdraw(double amount) {
+        if(amount>0 && amount<=getBalance()) {
+            balance -=amount;
+            return true;
+            System.out.println("Du har hævet: " + amount);
+        } else {
+            return false;
+            System.out.println("Beløbet du har valgt er ikke tilgængeligt");
+        }
     }
 
     public Customer getCustomer() {
@@ -36,4 +48,5 @@ public class Account {
     public void setCard(Card card) {
         this.card = card;
     }
+
 }
